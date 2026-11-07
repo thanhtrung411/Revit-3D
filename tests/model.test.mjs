@@ -4,9 +4,9 @@ import { readFileSync } from 'node:fs';
 import { wallOpacity, floorOffset, kindOf, slabDisplayFloor } from '../src/model-logic.js';
 import { IfcAPI, IFCBUILDINGSTOREY, IFCRELCONTAINEDINSPATIALSTRUCTURE, IFCWALL, IFCFURNITURE } from 'web-ifc';
 
-test('walls are absent up close, opaque from afar, and fade continuously', () => {
-  assert.equal(wallOpacity(10, 100), 0);
-  assert.equal(wallOpacity(30, 100), 0);
+test('walls stay faint up close and fade to opaque from afar', () => {
+  assert.equal(wallOpacity(10, 100), .18);
+  assert.equal(wallOpacity(30, 100), .18);
   assert.ok(Math.abs(wallOpacity(55, 100) - .5) < 1e-10);
   assert.equal(wallOpacity(80, 100), 1);
   assert.equal(wallOpacity(1000, 100), 1);

@@ -13,7 +13,15 @@ npm install
 npm run dev -- --port 5173 --strictPort
 ```
 
-Giữ cửa sổ máy chủ khi sử dụng. Đây là web chạy cục bộ; chưa xuất bản lên mạng.
+Giữ cửa sổ máy chủ khi xem web cục bộ.
+
+## Đăng lên GitHub Pages
+
+1. Mở repo trên GitHub, vào **Settings → Pages → Source**, chọn **GitHub Actions**.
+2. Commit và push mã nguồn lên nhánh `main`. Workflow [pages.yml](.github/workflows/pages.yml) sẽ cài dependencies, chạy kiểm thử, build và đăng thư mục `dist`.
+3. Mở tab **Actions** để xem kết quả. Khi chạy thành công, lấy link web trong **Settings → Pages**. Nếu bạn bật Pages sau khi đã push, chọn workflow **Deploy viewer to GitHub Pages** trong **Actions** rồi bấm **Run workflow**.
+
+Với repo `thanhtrung411/Revit-3D`, địa chỉ mặc định là `https://thanhtrung411.github.io/Revit-3D/`. Bản build dùng đường dẫn tương đối để IFC và các tài nguyên tải đúng dưới tên repo. Khi đăng công khai, người xem có thể tải file `7112026.ifc` từ web.
 
 ## Dữ liệu đã kiểm tra
 
@@ -21,14 +29,14 @@ Giữ cửa sổ máy chủ khi sử dụng. Đây là web chạy cục bộ; ch
 - 3 tầng: Level 1, Level 2, Level 3.
 - 46 tường, 109 cấu kiện nội thất, 9 thiết bị vệ sinh, 18 cửa, 2 cầu thang và các cấu kiện khác.
 - 349 phần hình học, 174.527 tam giác. Tất cả cấu kiện hình học có quan hệ tầng.
-- Màu được tự phối theo loại IFC; Curtain Panels được nhận diện là kính.
+- Viewer dùng màu bề mặt IFC, phối sàn be và kính xanh, thêm viền mảnh theo cạnh cấu kiện. Curtain Panels được nhận diện là kính.
 - Hai sàn (602 và 613) trong IFC được gán vào tầng bên dưới. Viewer nhóm chúng theo tầng được đỡ, dựa vào sự trùng cao độ giữa mặt trên sàn và chân tường. Việc này chỉ đổi nhóm hiển thị, không sửa tọa độ hoặc nội dung IFC. Vì vậy chế độ tách tầng không còn sàn che nội thất tầng dưới.
 - File không chứa cấu kiện IfcRoof nên điều khiển mái tự ẩn.
 
 ## Sử dụng
 
 - **Xoay:** kéo chuột; **zoom:** con lăn hoặc +/−; **di chuyển:** chuột phải. Cảm ứng: một ngón xoay, hai ngón zoom/di chuyển.
-- Zoom gần: tường/cửa/kính mờ dần đến biến mất, nội thất hiện ra. Zoom xa: lớp vỏ hiện lại và nội thất ẩn đi.
+- Nội thất tầng trên cùng luôn hiện, kể cả khi zoom xa. Nội thất các tầng dưới hiện khi zoom gần và ẩn khi zoom xa. Tường mờ dần khi lại gần và giữ độ hiện tối thiểu 18% để còn thấy bố cục phòng.
 - **Tách tầng:** nâng các tầng, chỉnh khoảng cách trong bảng Công cụ. Chọn Xoay để ghép lại.
 - **Mặt cắt:** ẩn phần phía trên cao độ chọn. Mặt bị cắt chưa được bịt kín.
 - **Công cụ / ☰:** lọc tầng, bật/tắt tường mờ, nền trời và lưới.

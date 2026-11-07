@@ -1,7 +1,7 @@
 export function wallOpacity(distance, referenceDistance, enabled = true) {
   if (!enabled) return 1;
   const t = Math.min(1, Math.max(0, (distance / referenceDistance - 0.30) / 0.50));
-  return t * t * (3 - 2 * t);
+  return Math.max(.18, t * t * (3 - 2 * t));
 }
 export function floorOffset(index, amount, spacing) {
   return index * amount * spacing;

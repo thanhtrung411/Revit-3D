@@ -16,6 +16,8 @@ export function createSky() {
         vec2 uv=vec2(atan(d.z,d.x)*2.3,d.y*6.0)+vec2(4.0,8.0);
         float clouds=smoothstep(0.46,0.72,fbm(uv));
         color=mix(color,vec3(0.96,0.96,0.94),clouds*0.85);
+        vec3 ground=mix(vec3(0.13,0.21,0.33),vec3(0.035,0.065,0.12),clamp(-d.y,0.0,1.0));
+        color=mix(color,ground,smoothstep(0.02,0.36,-d.y));
         gl_FragColor=vec4(color,1.0);
         #include <colorspace_fragment>
       }`,

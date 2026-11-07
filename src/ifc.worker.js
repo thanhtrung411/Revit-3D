@@ -46,7 +46,8 @@ self.onmessage = async ({ data }) => {
         const geo = api.GetGeometry(model, placed.geometryExpressID);
         const vertices = api.GetVertexArray(geo.GetVertexData(), geo.GetVertexDataSize()).slice();
         const indices = api.GetIndexArray(geo.GetIndexData(), geo.GetIndexDataSize()).slice();
-        meshes.push({ vertices, indices, matrix: Array.from(placed.flatTransformation) });
+        const { x, y, z } = placed.color;
+        meshes.push({ vertices, indices, matrix: Array.from(placed.flatTransformation), color: [x, y, z] });
         transfers.push(vertices.buffer, indices.buffer);
         geo.delete();
       }
