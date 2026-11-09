@@ -8,7 +8,7 @@ import { createSky } from './sky.js';
 
 const $ = selector => document.querySelector(selector);
 const assetBase = import.meta.env.BASE_URL;
-const palette = { wall: 0x808286, floor: 0xd8c1a3, glass: 0x5d9bb5, furniture: 0xd9b770, stair: 0xa6a3a0, structure: 0xa6a9ad, roof: 0x737982 };
+const palette = { wall: 0xffffff, floor: 0xd8c1a3, glass: 0x5d9bb5, furniture: 0xd9b770, stair: 0xa6a3a0, structure: 0xa6a9ad, roof: 0x737982 };
 const swatch = kind => new THREE.Color(palette[kind]).getHexString();
 $('#app').innerHTML = `
 <header>
@@ -90,7 +90,8 @@ function addGeometry(model, geometry, matrix, floor, category, name, id, ifcColo
     model.outlineMaterials.set(kind, new THREE.LineBasicMaterial({ color: 0x252a30, transparent: true, depthWrite: false }));
   }
   const color = new THREE.Color(palette[kind]);
-  if (ifcColor && kind !== 'floor' && kind !== 'glass') {
+  const isWall = kind === 'wall' && /^IFCWALL/i.test(category);
+  if (ifcColor && !isWall && kind !== 'floor' && kind !== 'glass') {
     color.setRGB(ifcColor[0], ifcColor[1], ifcColor[2], THREE.SRGBColorSpace);
   }
   const colors = new Float32Array(geometry.attributes.position.count * 3);
